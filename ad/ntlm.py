@@ -1,3 +1,8 @@
-import hashlib,binascii,sys
-hash = hashlib.new('md4', sys.argv[1].encode('utf-16le')).digest()
-print('{0}:{1}'.format(sys.argv[1], binascii.hexlify(hash).decode()))
+import binascii,sys
+from Crypto.Hash import MD4
+
+hash_obj = MD4.new()
+hash_obj.update(sys.argv[1].encode('utf-16le'))
+hash_digest = binascii.hexlify(hash_obj.digest()).decode()
+print(f'{sys.argv[1]}:{hash_digest}')
+
